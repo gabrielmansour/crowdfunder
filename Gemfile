@@ -37,10 +37,11 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-group :tools do
+group :development do
   gem 'rb-fsevent', require: false
   gem 'guard-rspec'
   gem 'guard-livereload'
+  gem 'guard-bundler'
 end
 
 group :test do
@@ -50,3 +51,5 @@ group :test do
   gem 'capybara-webkit'
   gem 'rspec-rails'
 end
+
+gem 'sorcery'
