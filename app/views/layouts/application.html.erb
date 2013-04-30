@@ -10,7 +10,14 @@
 
 <%= render 'layouts/nav' %>
 
-<%= yield %>
+<div class="container">
+  <% if notice.present? %>
+    <div class="alert alert-success"><%= notice %></div>
+  <% end %>
+
+
+  <%= yield %>
+</div>
 
 </body>
 </html>
