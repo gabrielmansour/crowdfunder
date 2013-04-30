@@ -1,0 +1,13 @@
+<h1>Log in</h1>
+
+<%= form_tag do %>
+  <fieldset>
+    <%= text_field_tag :email, params[:email], placeholder: "Email", class: "input-block-level" %>
+    <%= password_field_tag :password, params[:password], placeholder: "Password", class: "input-block-level" %>
+  </fieldset>
+
+  <fieldset class="form-actions">
+    <%= submit_tag "Log in", class: "btn btn-primary" %>
+  </fieldset>
+
+<% end %>

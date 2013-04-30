@@ -58,4 +58,59 @@ describe "User flows" do
       end
     end
   end
+
+
+  describe "login" do
+    before do
+      visit root_path
+      click_link "Log in"
+    end
+
+    it "should display the login page" do
+      current_path.should == login_path
+    end
+
+    context "successful" do
+      before { create_user_and_login }
+
+      specify { find(".alert").should have_content("Welcome back.") }
+      specify { page.should_not have_content "Sign up" }
+      specify { page.should have_link("Log out") }
+      specify { page.should have_content("Logged in as Tina Fey") }
+    end
+
+    context "unsuccessful" do
+      before do
+        visit login_path
+        click_button "Log in"
+      end
+
+      specify { find(".alert").should have_content("Invalid email or password.") }
+
+      specify { page.should_not have_content("Welcome back.") }
+      specify { page.should have_content "Sign up" }
+      specify { page.should_not have_link("Log out") }
+      specify { page.should_not have_content("Logged in as") }
+    end
+  end
+
+  describe "logout" do
+    before do
+      create_user_and_login
+      click_link "Log out"
+    end
+
+    specify { page.should_not have_content("Log out") }
+    specify { find(".alert").should have_content("You have been logged out.") }
+    specify { page.should have_content("Sign up") }
+    specify { page.should_not have_content("Logged in as") }
+  end
+end
+
+def create_user_and_login
+  visit login_path
+  user = create(:user, password: "secret")
+  fill_in "Email", with: user.email
+  fill_in "Password", with: "secret"
+  click_button "Log in"
 end
