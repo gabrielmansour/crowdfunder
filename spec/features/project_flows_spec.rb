@@ -14,6 +14,15 @@ describe "Project Flows" do
       specify { find(".navbar li.active a").text.should == "Projects" }
     end
 
+    context "on project show page" do
+      before do
+        @project = create(:project)
+        visit project_path(@project)
+      end
+
+      specify { current_path.should == project_path(@project) }
+      specify { find(".navbar li.active a").text.should == "Projects" }
+    end
   end
 
   describe "projects" do
