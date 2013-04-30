@@ -1,6 +1,9 @@
 <h1>Listing Projects</h1>
 <ul id="projects">
   <% @projects.each do |project| %>
-    <li><%= project.title %>
+    <li>
+      <%= link_to project.title, project %>
+      <p><%= project.teaser %></p>
+    </li>
   <% end %>
 </ul>
