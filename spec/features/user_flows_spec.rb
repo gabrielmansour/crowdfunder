@@ -22,7 +22,7 @@ describe "User flows" do
       end
 
       specify { current_path.should == root_path }
-      specify { page.should have_content("Account created.") }
+      specify { find(".alert").should have_content("Account created.") }
       specify { page.should_not have_content "Sign up" }
       specify { page.should have_link("Log out") }
       specify { page.should have_content("Logged in as Akira Kurosawa") }
@@ -39,7 +39,7 @@ describe "User flows" do
       end
 
       specify { page.should_not have_content("Account created.") }
-      specify { page.should have_content("Sign up") }
+      specify { find(".navbar").should have_content("Sign up") }
       specify { page.should_not have_link("Log out") }
       specify { page.should_not have_content("Logged in as") }
 
