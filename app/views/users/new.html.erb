@@ -1,6 +1,16 @@
 <h1>Sign up for an account</h1>
-<%= form_for @user do |f| %>
-  <fieldset class="span6">
+<%= form_for @user, html: { class: :span6 } do |f| %>
+    <% if f.object.errors.any? %>
+      <div class="alert alert-error">
+      <p>Please correct the following errors:</p>
+      <ul>
+        <% f.object.errors.full_messages.each do |message| %>
+          <%= content_tag :li, message %>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+  <fieldset>
     <%= f.text_field :first_name, placeholder: "First Name", class: "input-block-level" %>
     <%= f.text_field :last_name, placeholder: "Last Name", class: "input-block-level" %>
     <%= f.text_field :email, placeholder: "Email", class: "input-block-level" %>

@@ -38,6 +38,12 @@ describe "User flows" do
         click_button "Sign Up"
       end
 
+      specify { find(".alert").should have_content("Please correct the following errors") }
+
+      it "should display 4 errors" do
+        all(".alert ul li").should have(4).items
+      end
+
       specify { page.should_not have_content("Account created.") }
       specify { find(".navbar").should have_content("Sign up") }
       specify { page.should_not have_link("Log out") }
