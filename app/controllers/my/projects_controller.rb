@@ -30,4 +30,10 @@ class My::ProjectsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    @project = current_user.projects.find(params[:id])
+    @project.destroy
+    redirect_to my_projects_path
+  end
 end

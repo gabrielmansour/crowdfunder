@@ -44,6 +44,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
+    Capybara.javascript_driver = :webkit
   end
 
   config.before(:each) do

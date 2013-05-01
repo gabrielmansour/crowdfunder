@@ -117,4 +117,50 @@ describe "My Projects flow" do
       end
     end
   end
+
+  describe "Destroy project", js: true do
+    before do
+      create_user_and_login
+      add_project
+      edit_path = "/my#{current_path}/edit"
+
+      visit my_projects_path
+      page.should have_content "5D Glasses"
+
+      visit edit_path
+    end
+
+    context "accept confirmation" do
+      before do
+        page.driver.accept_js_confirms!
+        click_button "Delete Project"
+      end
+
+      it "should display a confirmation window" do
+        page.driver.confirm_messages.should == ["Are you sure?"]
+      end
+
+      it "should delete the project" do
+        visit my_projects_path
+        page.should_not have_content "5D Glasses"
+      end
+    end
+
+    context "reject confirmation" do
+      before do
+        page.driver.dismiss_js_confirms!
+        click_button "Delete Project"
+      end
+
+      it "should display a confirmation window" do
+        page.driver.confirm_messages.should == ["Are you sure?"]
+      end
+
+      it "should not delete the project" do
+        click_button "Delete Project"
+        visit my_projects_path
+        page.should have_content "5D Glasses"
+      end
+    end
+  end
 end

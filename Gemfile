@@ -48,10 +48,11 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'capybara'
+  gem 'capybara', '~> 2.0.3'
   gem 'capybara-webkit'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'pry'
 end
 
 gem 'sorcery'

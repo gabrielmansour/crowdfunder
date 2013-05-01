@@ -1,7 +1,8 @@
 <h1>Edit Project</h1>
 
 <div class="well">
-<%= link_to "&larr; My Projects".html_safe, my_projects_path, class: "btn btn-small" %>
+  <%= button_to "Delete Project", [:my, @project], class: "btn btn-danger", method: :delete, confirm: "Are you sure?", form_class: "pull-right"%>
+  <%= link_to "&larr; My Projects".html_safe, my_projects_path, class: "btn btn-small" %>
 </div>
 
 <%= form_for [:my, @project] do |f| %>
