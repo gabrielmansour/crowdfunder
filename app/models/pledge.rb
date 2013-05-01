@@ -5,5 +5,5 @@ class Pledge < ActiveRecord::Base
 
   validates :user, presence: true
   validates :project, presence: true
-  validates :amount, numericality: { greater_than: 0 }
+  validates :amount, numericality: { greater_than: 0, allow_blank: false }
 end
