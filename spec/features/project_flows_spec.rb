@@ -164,4 +164,24 @@ describe "Project Flows" do
 
     end
   end
+
+
+  describe "projects search" do
+    before do
+      @project1 = create(:project, title: "Tintin Theme Park")
+      @project2 = create(:project, title: "Park Avenue Festival")
+      @project3 = create(:project, title: "Library Expansion")
+
+      visit projects_path
+      all("ul#projects li a").map(&:text).should == ["Library Expansion", "Park Avenue Festival", "Tintin Theme Park"]
+    end
+
+    it "should only show projects whose name matches the search query" do
+      fill_in "Search", with: "park"
+      click_button "Search"
+
+      all("ul#projects li a").map(&:text).should == ["Park Avenue Festival", "Tintin Theme Park"]
+    end
+
+  end
 end

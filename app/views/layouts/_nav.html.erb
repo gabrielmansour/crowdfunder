@@ -14,6 +14,13 @@
           <li class="<%= 'active' if controller_path.starts_with?("my/") %>">
             <%= link_to 'My Projects', my_projects_path %>
           </li>
+
+          <li>
+            <%= form_tag projects_path, method: :get, class: "navbar-search" do %>
+              <%= text_field_tag :q, params[:q], class: "search-query", placeholder: "Search" %>
+              <%= submit_tag "Search", class: "hide", name: nil %>
+            <% end %>
+          </li>
         </ul>
       </div><!--/.nav-collapse -->
 
