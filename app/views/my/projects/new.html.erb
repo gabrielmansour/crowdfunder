@@ -1,0 +1,13 @@
+<h1>New Project</h1>
+
+<div class="well">
+<%= link_to "&larr; My Projects".html_safe, my_projects_path, class: "btn btn-small" %>
+</div>
+
+<%= form_for [:my, @project], html: {class: :span6 } do |f| %>
+  <%= render f %>
+
+  <div class="form-actions">
+    <%= f.submit "Publish Project", class: "btn btn-primary" %>
+  </div>
+<% end %>

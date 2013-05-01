@@ -7,8 +7,12 @@
           <li class="<%= 'active' if current_page? root_path %>">
             <%= link_to 'Home', :root %>
           </li>
-          <li class="<%= 'active' if controller_name == "projects" %>">
+          <li class="<%= 'active' if controller_path == "projects" %>">
             <%= link_to 'Projects', :projects %>
+          </li>
+          <li class="divider-vertical"></li>
+          <li class="<%= 'active' if controller_path == "my/projects" %>">
+            <%= link_to 'My Projects', my_projects_path %>
           </li>
         </ul>
       </div><!--/.nav-collapse -->

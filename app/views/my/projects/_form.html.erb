@@ -1,0 +1,8 @@
+<%= render 'layouts/form_errors', f: form %>
+
+<fieldset>
+<%= form.text_field :title, placeholder: "Title", class: "input-block-level" %>
+<%= form.text_field :teaser, placeholder: "Teaser text", class: "input-block-level" %>
+<%= form.text_area :description, placeholder: "Detailed Description...", class: "input-block-level", rows: 3 %>
+<%= form.number_field :goal, placeholder: "Goal Amount", class: "input-block-level" %>
+</fieldset>

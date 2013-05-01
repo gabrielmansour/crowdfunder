@@ -1,0 +1,12 @@
+<h1>Edit Project</h1>
+
+<div class="well">
+<%= link_to "&larr; My Projects".html_safe, my_projects_path, class: "btn btn-small" %>
+</div>
+
+<%= form_for [:my, @project] do |f| %>
+  <fieldset class="span6">
+    <%= render f %>
+    <%= f.submit "Update Project", class: "btn" %>
+  </fieldset>
+<% end %>

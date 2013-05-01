@@ -9,5 +9,9 @@ Crowdfunder::Application.routes.draw do
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
 
+  namespace :my do
+    resources :projects
+  end
+
   root to: "home#index"
 end

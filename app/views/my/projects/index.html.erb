@@ -1,0 +1,15 @@
+<h1>My Projects</h1>
+
+<div class="well">
+<%= link_to "Create New Project", new_my_project_path, class: "btn btn-small btn-primary pull-right" %>
+</div>
+
+<ul id="projects">
+  <% @projects.each do |project| %>
+    <li>
+      <%= link_to project.title, [:edit, :my, project] %>
+      <p><%= project.teaser %></p>
+    </li>
+  <% end %>
+</ul>
+
