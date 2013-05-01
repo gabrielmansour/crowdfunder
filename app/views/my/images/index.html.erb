@@ -1,0 +1,11 @@
+<h1>Manage Images</h1>
+
+<div class="span6"><%= render @images %></div>
+
+<%= form_for [:my, @project, @images.new] do |f| %>
+  <fieldset class="well pull-right span3">
+    <h4>Add New Image</h4>
+    <%= f.file_field :file, class: "input-block-level" %>
+    <%= f.submit "Upload Image", class: "btn btn-primary btn-small" %>
+  </fieldset>
+<% end %>

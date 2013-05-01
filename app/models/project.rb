@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   has_many :pledges
+  has_many :images, dependent: :destroy
   belongs_to :user
   attr_accessible :description, :goal, :teaser, :title
 

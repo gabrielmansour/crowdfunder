@@ -5,8 +5,10 @@
 </div>
 
 <%= form_for [:my, @project] do |f| %>
+  <div class="well pull-right"><%= link_to "Manage Images", my_project_images_path(@project), class: 'btn btn-small' %></div>
   <fieldset class="span6">
     <%= render f %>
+
     <%= f.submit "Update Project", class: "btn" %>
   </fieldset>
 <% end %>

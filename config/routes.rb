@@ -10,7 +10,9 @@ Crowdfunder::Application.routes.draw do
   get 'logout' => 'sessions#destroy'
 
   namespace :my do
-    resources :projects
+    resources :projects do
+      resources :images
+    end
   end
 
   root to: "home#index"
