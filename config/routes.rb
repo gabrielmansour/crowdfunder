@@ -1,5 +1,8 @@
 Crowdfunder::Application.routes.draw do
-  resources :projects
+  resources :projects do
+    resources :pledges
+  end
+
   resources :users
 
   get 'login' => 'sessions#new'

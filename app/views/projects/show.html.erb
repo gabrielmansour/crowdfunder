@@ -1,2 +1,4 @@
 <h1><%= @project.title %></h1>
-<div class="author">By <%= [@project.user.first_name, @project.user.last_name].join(' ') %></div>
+<p class="author">By <%= [@project.user.first_name, @project.user.last_name].join(' ') %></p>
+
+<div><%= link_to "Back This Project", new_project_pledge_path(@project), class: "btn btn-primary" %></div>

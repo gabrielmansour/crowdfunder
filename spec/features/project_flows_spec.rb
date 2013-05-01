@@ -43,7 +43,7 @@ describe "Project Flows" do
       find("ul#projects").should have_content("Project 3")
     end
 
-    context "view a project" do
+    context "View a Project" do
       before do
         click_link "Project 1"
       end
@@ -59,6 +59,34 @@ describe "Project Flows" do
       it "should display the project creator's name" do
         find(".author").text.should == "By Tina Fey"
       end
+
+
+      describe "pledging" do
+        context "user logged in" do
+          before do
+            create_user_and_login
+            visit project_path(@project1)
+            click_link "Back This Project"
+          end
+
+          it "should allow me to pledge to a project" do
+            current_path.should == new_project_pledge_path(@project1)
+          end
+        end
+
+        context "user not logged in" do
+          before do
+            click_link "Back This Project"
+          end
+
+          it "should prompt me to sign up for an account" do
+            current_path.should == login_path
+            find(".alert").text.should == "Please log in first."
+          end
+        end
+      end
+
+
     end
   end
 end

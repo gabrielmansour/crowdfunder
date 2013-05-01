@@ -14,6 +14,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_back_or_to root_path, alert: "You have been logged out."
+    redirect_back_or_to root_path, notice: "You have been logged out."
   end
 end
