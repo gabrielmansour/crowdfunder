@@ -10,6 +10,7 @@ class PledgesController < ApplicationController
     @pledge = @project.pledges.new(params[:pledge])
     @pledge.user = current_user
     if @pledge.save
+      UserMailer.new_pledge(@pledge).deliver
       redirect_to @project, notice: "Hooray! You pledged $#{@pledge.amount}!"
     else
       render :new

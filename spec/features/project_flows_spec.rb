@@ -27,9 +27,10 @@ describe "Project Flows" do
 
   describe "projects" do
     before do
-      @project1 = create(:project, title: "Project 1")
-      @project2 = create(:project, title: "Project 2")
-      @project3 = create(:project, title: "Project 3")
+      @project_owner = create(:user, email: "jim@example.com")
+      @project1 = create(:project, title: "Project 1", user: @project_owner)
+      @project2 = create(:project, title: "Project 2", user: @project_owner)
+      @project3 = create(:project, title: "Project 3", user: @project_owner)
       visit projects_path
     end
 
@@ -74,14 +75,22 @@ describe "Project Flows" do
           end
 
           context "amount filled in" do
-            it "should add a pledge to the project" do
+            before do
               fill_in "Amount", with: "500"
               click_button "Pledge!"
+            end
 
+            it "should add a pledge to the project" do
               current_path.should == project_path(@project1)
               find(".alert").text.should == "Hooray! You pledged $500!"
               @project1.should have(1).pledges
               @project1.pledges.first.amount.should == 500
+            end
+
+            it "should sent email to project owner" do
+              should have_sent_email.to("jim@example.com")
+                .from("crowdfunder@example.com")
+                .with_subject("Someone has backed your project!")
             end
           end
 
@@ -93,6 +102,10 @@ describe "Project Flows" do
               find(".alert").should have_content "Amount must be a number greater than 0"
               @project1.should have(0).pledges
             end
+          end
+
+          it "should not send email" do
+            should_not have_sent_email
           end
         end
 

@@ -42,6 +42,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'guard-bundler'
+  gem 'letter_opener'
 end
 
 group :test do
