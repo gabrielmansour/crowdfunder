@@ -25,6 +25,46 @@ describe "Project Flows" do
     end
   end
 
+  describe "pagination" do
+    before do
+      50.times { |i| create(:project, title: "Project ##{i+1}") }
+      visit projects_path
+    end
+
+    it "should show up to 8 projects at a time" do
+      all("ul#projects li").should have(8).items
+    end
+
+    it "should display pagination info" do
+      page.should have_content "Displaying projects 1 - 8 of 50 in total"
+    end
+
+    it "should display the paginator" do
+      page.should have_css(".pagination")
+    end
+
+    it "should display the most recently created project first" do
+      first("ul#projects li a").text.should == "Project #50"
+    end
+
+    describe "navigating using the paginator" do
+      before { find(".pagination").click_link("2") }
+
+      it "should display the next batch of projects" do
+        all("ul#projects li a").map(&:text).should == (35..42).map{|i| "Project ##{i}"}.reverse
+      end
+
+      it "should not display projects from page 1" do
+        find("ul#projects").should_not have_content "Project #43"
+      end
+
+      it "should not display projects from page 3" do
+        find("ul#projects").should_not have_content "Project #34"
+      end
+    end
+  end
+
+
   describe "projects" do
     before do
       @project_owner = create(:user, email: "jim@example.com")
@@ -35,7 +75,7 @@ describe "Project Flows" do
     end
 
     it "should list projects" do
-      page.should have_content("Listing Projects")
+      page.should have_content("Projects")
     end
 
     it "should list projects" do
