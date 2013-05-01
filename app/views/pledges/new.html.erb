@@ -1,1 +1,9 @@
-<h1>Create Pledge towards Project</h1>
+<h1>Create Pledge towards <%= link_to @project.title, @project %>:</h1>
+
+<%= form_for @pledge, url: [@project, @pledge], html: { class: 'form-inline' } do |f| %>
+  <%= render 'layouts/form_errors', f: f %>
+  <fieldset>
+    <%= f.text_field :amount, placeholder: "Amount", class: "input-small" %>
+    <%= f.submit "Pledge!", class: "btn btn-primary" %>
+  </fieldset>
+<% end %>

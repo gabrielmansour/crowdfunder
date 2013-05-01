@@ -72,6 +72,28 @@ describe "Project Flows" do
           it "should allow me to pledge to a project" do
             current_path.should == new_project_pledge_path(@project1)
           end
+
+          context "amount filled in" do
+            it "should add a pledge to the project" do
+              fill_in "Amount", with: "500"
+              click_button "Pledge!"
+
+              current_path.should == project_path(@project1)
+              find(".alert").text.should == "Hooray! You pledged $500!"
+              @project1.should have(1).pledges
+              @project1.pledges.first.amount.should == 500
+            end
+          end
+
+          context "amount not filled in" do
+            it "should add a pledge to the project" do
+              fill_in "Amount", with: ""
+              click_button "Pledge!"
+
+              find(".alert").should have_content "Amount must be a number greater than 0"
+              @project1.should have(0).pledges
+            end
+          end
         end
 
         context "user not logged in" do

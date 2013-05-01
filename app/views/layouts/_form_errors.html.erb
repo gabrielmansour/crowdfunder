@@ -1,0 +1,10 @@
+<% if f.object.errors.any? %>
+  <div class="alert alert-error">
+  <p>Please correct the following errors:</p>
+  <ul>
+    <% f.object.errors.full_messages.each do |message| %>
+      <%= content_tag :li, message %>
+    <% end %>
+  </ul>
+  </div>
+<% end %>
